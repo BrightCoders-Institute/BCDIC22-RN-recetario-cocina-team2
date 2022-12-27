@@ -7,12 +7,15 @@ import {
   ScrollView,
   Image
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import BarraBusqueda from './Componentes/BarraBusqueda/BarraBusqueda.js'
 import image from './assets/favicon.png'
 
 //Cuando es una imagen local no tienes que usar el require
 
-export default function App () {
+export default function Home () {
+
+    const navigation=useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       <View>

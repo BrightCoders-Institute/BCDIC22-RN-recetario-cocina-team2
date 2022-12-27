@@ -1,16 +1,32 @@
 import * as React from 'react'
 import { View, TextInput, StyleSheet, Image } from 'react-native'
-//import image from '../../assets/mic.png'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 const BarraBusqueda = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        {/* <Image style={styles.imagen} source={image} /> */}
-        <View style={styles.vwSearch}></View>
+      <View style={styles.iconSearchContainer}>
+        <FontAwesome
+          style={styles.icon}
+          name='search' //Nombre que sale en la pagina
+          size={13}
+          color='white'
+        />
+      </View>
+
+      <View style={styles.textInputContainer}>
         <TextInput
-          placeholder='What do you want to eat?'
           style={styles.textInput}
+          placeholder='What do you want to eat?'
+          maxLenght={20}
+        />
+      </View>
+      <View style={styles.iconMicContainer}>
+        <FontAwesome
+          style={styles.icon}
+          name='microphone'
+          size={13}
+          color='white'
         />
       </View>
     </View>
@@ -19,33 +35,36 @@ const BarraBusqueda = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 30,
-    alignItems: 'center',
-    borderRadius: 30,
-  },
-  searchContainer: {
-    width: '100%',
-    height: 40,
+    width:300,
     flexDirection: 'row',
-    borderRadius: 30,
-    backgroundColor: '#474747'
+    margin: 20,
+    marginTop: 50,
+    alignItems: 'center',
+    backgroundColor: 'red',
+    backgroundColor: '#474747',
+    padding: 2,
+    borderRadius: 15
   },
-  textInput: {
-    flex: 1,
-    justiFyContent: 'flex-end',
-    width: '80%',
-    borderRadius: 30,
-    //backgroundColor: 'red'
-  },
-  vwSearch: {
+  iconSearchContainer: {
+    flexGrow: 0.3,
     justifyContent: 'center',
-    alignItems: 'center'
+    marginLeft: 10,
+    borderRadius: 15
   },
-  imagen: {
-    height: 40,
-    width: 40
+  icon: {
+    width: 20,
+    margin: 'auto'
   },
+  textInputContainer: {
+    flexGrow: 2,
+    backgroundColor: '#474747',
+    borderRadius: 15,
+    color: 'white'
+  },
+  textInput:{
+    color:'white'
+  },
+  iconMicContainer: {},
   text: {
     margin: 20
   }
