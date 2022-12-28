@@ -8,18 +8,21 @@ import {
   Image
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import BarraBusqueda from './Componentes/BarraBusqueda/BarraBusqueda.js'
-import image from './assets/favicon.png'
+import BarraBusqueda from '../Componentes/BarraBusqueda/BarraBusqueda'
+import ListaHorizontal from '../Componentes/ListaHorizontal/ListaHorizontal'
+//import image from './assets/favicon.png'
 
-//Cuando es una imagen local no tienes que usar el require
-
-export default function Home () {
-
-    const navigation=useNavigation()
+export default function Home ({nav}) {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <BarraBusqueda />
+        <BarraBusqueda/>
+        <Text style={styles.text}>TRENDING</Text>
+        <ListaHorizontal navigation={navigation}/> 
+        <Text style={styles.text}>LIKED</Text>
+        <ListaHorizontal navigation={navigation}/> 
+        
       </View>
     </SafeAreaView>
   )
@@ -32,10 +35,17 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   text: {
-    color: '#fff'
+    color: 'red',
+    fontSize:30,
+    marginTop:30,
+    marginBottom:10,
+    fontWeight:'bold'
   },
   imagen: {
     height: 40,
     width: 40
+  },
+  button:{
+    padding:10
   }
 })

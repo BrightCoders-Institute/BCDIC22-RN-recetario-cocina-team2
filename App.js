@@ -9,30 +9,14 @@ import {
 } from 'react-native'
 import BarraBusqueda from './Componentes/BarraBusqueda/BarraBusqueda.js'
 import image from './assets/favicon.png'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import MainStack from './Navigation/MainStack'
 
-//Cuando es una imagen local no tienes que usar el require
 
 export default function App () {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <BarraBusqueda />
-      </View>
-    </SafeAreaView>
+  
+    <MainStack/>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1E1E1E',
-    alignItems: 'center'
-  },
-  text: {
-    color: '#fff'
-  },
-  imagen: {
-    height: 40,
-    width: 40
-  }
-})
