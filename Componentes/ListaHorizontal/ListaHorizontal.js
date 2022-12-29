@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     color:'red'
    },
    contenedor:{
-    height:200,
+    height:170,
     width:350,
     //backgroundColor:'white'
    }

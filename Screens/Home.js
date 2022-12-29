@@ -35,10 +35,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   text: {
-    color: 'red',
+    color: '#FF4721',
     fontSize:30,
-    marginTop:30,
-    marginBottom:10,
+   margin:10,
     fontWeight:'bold'
   },
   imagen: {
