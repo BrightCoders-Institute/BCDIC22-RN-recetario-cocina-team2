@@ -3,15 +3,43 @@
 # App recetario de cocina
 - [Ver instrucciones](./instructions.md)
 
-This README would normally document whatever steps are necessary to get the application up and running.
+## Tabla de contenidos
 
-Things you may want to cover:
+- [Descripción](#Descripción)
+- [Uso](#Uso)
+  - [Instalar dependencias](#Instalar-dependencias)
+  - [Ejecutar](#Ejecutar)
+  - [Pruebas](#Pruebas)
+- [Créditos](#Créditos)
+- [Insignias](#Insignias)
 
-- Title or Project Name
-- Table of contents
-- Description. A brief description of what the project is about
-- How to Install and Run the Project.
-- How to Use the Project.
-- Credits
-- Badges
+## Description.
+Recetario de cocina descripción
+
+# uso
+### Instalar dependencias
+
+```
+npm install
+```
+
+### Ejecutar
+
+```
+npx expo start
+```
+
+### Pruebas
+
+```
+npm test
+```
+
+## Créditos
+
+- [@Manz1999](https://github.com/Manz1999)
+- [@Camilapinz18](https://github.com/Camilapinz18)
+- [@GaddPat0609](https://github.com/GaddPat0609)
+
+## Insignias
   
