@@ -1,0 +1,81 @@
+[
+    {
+        "nombre": "hamburgueja",
+        "foto": "https://foodandtravel.mx/wp-content/uploads/2021/05/Hamburguesas.jpg",
+        "porciones": 1,
+        "ingredientes": {
+            "Pan": "2 piezas",
+            "Queso": "1 rebanada",
+            "Tomate": "2 rodajas",
+            "Carne": "200 grs",
+            "Lechuga": "10 grs"
+        }
+    },
+    {
+        "nombre": "Espaguetis",
+        "foto": "https://www.pequerecetas.com/wp-content/uploads/2010/10/espaguetis-carbonara1.jpg",
+        "porciones": 4,
+        "ingredientes": {
+            "Yemas de huevo": 3,
+            "Huevo": 1,
+            "Panceta": "100 gr",
+            "Queso pecorino": "50 grs",
+            "Sal y pimienta": "al gusto",
+            "Espaguetis": "320 grs"
+        }
+    },
+    {
+        "nombre": "Pizza de pepperoni",
+        "foto": "https://www.recetin.com/wp-content/uploads/2011/07/pizza_peperoni-598x400.jpg",
+        "porciones": 2,
+        "ingredientes": {
+            "Base de masa para pizza": 1,
+            "Pepperoni": "100 grs",
+            "Queso mozzarella": "200 gr",
+            "Tomate triturado": "1 lata",
+            "Sal": "al gusto",
+            "Pimienta" : "al gusto",
+            "Orégano" : "al gusto"
+        }
+    },
+    {
+        "nombre": "Sopitos",
+        "foto": "https://voxlocalis.net/media/fotos/los_sopitos.jpg",
+        "porciones": 5,
+        "ingredientes": {
+            "carne de res molida": "50 grs",
+            "Queso": "al gusto",
+            "frijoles fritos": "una embarrada xd",
+            "Lechuga": "5 grs"
+        }
+    },
+    {
+        "nombre": "Carne en bistec",
+        "foto": "https://i.ytimg.com/vi/h5VVDwtpFX8/maxresdefault.jpg",
+        "porciones": 1,
+        "ingredientes": {
+            "Filete de carne": "4 filetes",
+            "Cebolla": "1 pieza",
+            "Ajo": "1 cucharada",
+            "Tomate": "2 piezas",
+            "Agua": "1/4 taza",
+            "Aceite": "1 cucharada",
+            "Sal": "Una pizca",
+            "Salsa de tomate": "4 cucharadas"
+        }
+    },
+    {
+        "nombre": "Arepa boyacense",
+        "foto": "https://www.elespectador.com/resizer/UY6mrLnw_0WwZxLzi0Wc8KVT2bE=/525x350/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/MMSF4T4WD5HFLIZBHYYDXIBWZQ.jpg",
+        "porciones": 1,
+        "ingredientes": {
+            "Harina de maiz amarillo": "1 taza",
+            "Harina de trigo": "3 cucharadas",
+            "Panela rallada": "2 1/2 cucharadas",
+            "Sal": "1/4 cucharadita",
+            "Queso campesino": "1 3/4 taza",
+            "Mantequilla": "2 cucharadas",
+            "Aceite": "Al gusto"
+        }
+    }
+]

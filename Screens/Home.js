@@ -12,6 +12,8 @@ import BarraBusqueda from '../Componentes/BarraBusqueda/BarraBusqueda'
 import ListaHorizontal from '../Componentes/ListaHorizontal/ListaHorizontal'
 //import image from './assets/favicon.png'
 
+
+
 export default function Home ({nav}) {
   const navigation = useNavigation()
   return (

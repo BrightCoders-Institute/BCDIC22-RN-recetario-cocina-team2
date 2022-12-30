@@ -6,14 +6,21 @@ import {
   Dimensions,
   ImageBackground,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
 import React from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import EvilIcons from '@expo/vector-icons/EvilIcons'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
 
-export default function Details () {
+export default function Details({route}) {
+  const navigation = useNavigation()
+  const ingredientesInfo=route.params.ingredientes
+  const nombreIngrediente = Object.keys(ingredientesInfo)
+  console.log("nomnre Ingredientes:",nombreIngrediente)
+
   return (
     <SafeAreaView style={styles.background}>
       <ImageBackground
@@ -23,12 +30,15 @@ export default function Details () {
         style={styles.image}
       >
         <View style={styles.imageContainer}>
-          <Ionicons
-            style={styles.iconCerrar}
-            name='close-outline' //Nombre que sale en la pagina
-            size={35}
-            color='white'
-          />
+          <TouchableOpacity>
+            <Ionicons
+              style={styles.iconCerrar}
+              name='close-outline' //Nombre que sale en la pagina
+              size={35}
+              color='white'
+              onPress={()=>navigation.navigate('Home')}
+            />
+          </TouchableOpacity>
 
           <Ionicons
             style={styles.iconCompartir}
@@ -36,13 +46,14 @@ export default function Details () {
             size={25}
             color='white'
           />
-
-          <Ionicons
-            style={styles.iconCorazon}
-            name='heart-outline' //Nombre que sale en la pagina
-            size={25}
-            color='white'
-          />
+          <TouchableOpacity>
+            <Ionicons
+              style={styles.iconCorazon}
+              name='heart-outline' //Nombre que sale en la pagina
+              size={25}
+              color='white'
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.contenedorTexto}>
@@ -56,45 +67,15 @@ export default function Details () {
       </View>
 
       <View style={styles.contenedor}>
-        <View style={styles.ingredientes}>
+        
           <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
-          </View>
-          <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
-          </View>
-          <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
-          </View>
-          <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
-          </View>
-          <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
-          </View>
-          <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>Soy un perro ingrediente</Text>
+            <Text style={styles.smallText}>{nombreIngrediente}</Text>
             <Text style={styles.smallTextCantidad}>
               Soy una libra
             </Text>
           </View>
         </View>
-      </View>
+      
     </SafeAreaView>
   )
 }
@@ -111,10 +92,10 @@ const styles = StyleSheet.create({
   },
   smallTextCantidad: {
     //backgroundColor:"red",
-    color:"white",
-    margin:3,
-    marginLeft:80,
-    fontSize:12
+    color: "white",
+    margin: 3,
+    marginLeft: 80,
+    fontSize: 12
   },
 
   background: {
@@ -183,7 +164,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'green'
   },
   ingredientes: {
-   // backgroundColor: 'green',
+    // backgroundColor: 'green',
     marginTop: 20
     // width: 150,
     // height: 200
