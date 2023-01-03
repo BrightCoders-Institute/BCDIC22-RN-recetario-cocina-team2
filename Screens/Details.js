@@ -7,25 +7,36 @@ import {
   ImageBackground,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native'
 import React from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import EvilIcons from '@expo/vector-icons/EvilIcons'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
+import { event } from "../Event/index";
 
-export default function Details({route}) {
+export default function Details ({ route }) {
+  const nombre=route.params.nombre
+  const eventName=route.params.eventName
+  console.log("EVENTNMAME",typeof eventName)
   const navigation = useNavigation()
-  const ingredientesInfo=route.params.ingredientes
+  let isLiked = route.params.isLiked
+  console.log('isliked', isLiked)
+  const ingredientesInfo = route.params.ingredientes
+  //console.log('routeparams', route.params)
   const nombreIngrediente = Object.keys(ingredientesInfo)
-  console.log("nomnre Ingredientes:",nombreIngrediente)
+  const cantidades = Object.values(ingredientesInfo)
+  //console.log('nomnre Ingredientes:', nombreIngrediente)
+  //console.log('nomnre cantidades:', cantidades)
+  //console.log('nomnre :', route.params.nombre)
 
   return (
     <SafeAreaView style={styles.background}>
       <ImageBackground
         source={{
-          uri: 'https://foodandtravel.mx/wp-content/uploads/2021/05/Hamburguesas.jpg'
+          uri: route.params.foto
         }}
         style={styles.image}
       >
@@ -36,7 +47,7 @@ export default function Details({route}) {
               name='close-outline' //Nombre que sale en la pagina
               size={35}
               color='white'
-              onPress={()=>navigation.navigate('Home')}
+              onPress={() => navigation.navigate('Home')}
             />
           </TouchableOpacity>
 
@@ -46,36 +57,72 @@ export default function Details({route}) {
             size={25}
             color='white'
           />
-          <TouchableOpacity>
-            <Ionicons
-              style={styles.iconCorazon}
-              name='heart-outline' //Nombre que sale en la pagina
-              size={25}
-              color='white'
-            />
+
+          <TouchableOpacity
+            onPress={() =>event.emit(eventName,nombre)}
+          >
+            {isLiked ? (
+              <Ionicons
+                style={styles.iconCorazon}
+                name='heart' //Nombre que sale en la pagina
+                size={25}
+                color='red'
+              />
+            ) : (
+              <Ionicons
+                style={styles.iconCorazon}
+                name='heart-outline' //Nombre que sale en la pagina
+                size={25}
+                color='white'
+              />
+            )}
           </TouchableOpacity>
         </View>
 
         <View style={styles.contenedorTexto}>
           <Text style={styles.textCategory}>TRENDING</Text>
-          <Text style={styles.text}>Hamburgueja al vapor</Text>
+          <Text style={styles.text}>{route.params.nombre}</Text>
         </View>
       </ImageBackground>
       <View style={styles.cantidad}>
         <Text style={styles.smallText1}>Ingredients</Text>
         <Text style={styles.smallText2}>for 3 servings</Text>
       </View>
-
-      <View style={styles.contenedor}>
-        
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.contenedor}>
           <View style={styles.itemImgrediente}>
-            <Text style={styles.smallText}>{nombreIngrediente}</Text>
-            <Text style={styles.smallTextCantidad}>
-              Soy una libra
-            </Text>
+            {nombreIngrediente.map(ingrediente => {
+              return (
+                <View style={styles.border}>
+                  <Text style={styles.textCantidades}>{ingrediente}</Text>
+                </View>
+              )
+            })}
+          </View>
+          <View style={styles.itemImgrediente}>
+            {cantidades.map(cantidad => {
+              return (
+                <View style={styles.border}>
+                  <Text style={styles.textCantidadesDerecha}>{cantidad}</Text>
+                </View>
+              )
+            })}
           </View>
         </View>
-      
+      </ScrollView>
+
+      {/* <FlatList
+        data={ingredientesInfo}
+        keyExtractor={(item, index) => index.toString()}
+        
+        renderItem={({ item }) => (
+          <View>
+            <Text style={styles.itemImgrediente}></Text>
+          </View>
+        )}
+      >
+       
+      </FlatList> */}
     </SafeAreaView>
   )
 }
@@ -83,6 +130,9 @@ export default function Details({route}) {
 const styles = StyleSheet.create({
   contenedorTexto: {
     //backgroundColor: 'red',
+  },
+  linea: {
+    backgroundColor: 'red'
   },
   cantidad: {
     //backgroundColor: 'red',
@@ -92,7 +142,7 @@ const styles = StyleSheet.create({
   },
   smallTextCantidad: {
     //backgroundColor:"red",
-    color: "white",
+    color: 'white',
     margin: 3,
     marginLeft: 80,
     fontSize: 12
@@ -100,7 +150,7 @@ const styles = StyleSheet.create({
 
   background: {
     flex: 1,
-    backgroundColor: '#1E1E1E',
+    backgroundColor: '#282828',
     alignItems: 'center'
   },
   text: {
@@ -137,10 +187,10 @@ const styles = StyleSheet.create({
   },
   iconCorazon: {
     marginTop: 40,
-    // backgroundColor: 'blue',
+    //backgroundColor: 'blue',
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 0.09,
+
     height: 30
     //marginLeft: 180
     //justifyContent: 'flex-end'
@@ -149,16 +199,16 @@ const styles = StyleSheet.create({
     marginTop: 40,
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 0.7,
+
     marginLeft: 25,
     height: 30
-    // backgroundColor: 'red'
+    //backgroundColor: 'red'
   },
   iconCompartir: {
     marginTop: 40,
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 0.05,
+
     height: 30
     //marginLeft: 30,
     //backgroundColor: 'green'
@@ -175,18 +225,40 @@ const styles = StyleSheet.create({
     // height: 200
   },
   contenedor: {
+    //backgroundColor: 'green',
     display: 'flex',
-    flexDirection: 'column',
-    width: 300
+    flexDirection: 'row',
+    marginTop: 20
   },
   textCategory: {
     color: 'white',
     marginLeft: 20
   },
   itemImgrediente: {
-    //backgroundColor:'blue',
-    margin: 3,
+    //backgroundColor: 'blue',
+    margin: 0,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'column',
+    width: 150
+    //justifyContent:"flex-start",
+    //alignContent:"flex-start"
+    //alignItems:"flex-start"
+  },
+  textCantidades: {
+    color: 'white',
+    fontSize: 13,
+    margin: 8
+  },
+  textCantidadesDerecha: {
+    color: 'white',
+    fontSize: 13,
+    margin: 8,
+    textAlign: 'right'
+  },
+  border: {
+    borderBottomColor: 'rgba(255,255,255,0.1)',
+    borderBottomWidth: 1
+
+    //backgroundColor: 'blue',
   }
 })

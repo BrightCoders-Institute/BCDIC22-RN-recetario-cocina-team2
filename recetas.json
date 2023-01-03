@@ -1,6 +1,6 @@
 [
     {
-        "nombre": "hamburgueja",
+        "nombre": "Hamburgueja",
         "foto": "https://foodandtravel.mx/wp-content/uploads/2021/05/Hamburguesas.jpg",
         "porciones": 1,
         "ingredientes": {
@@ -51,7 +51,7 @@
     },
     {
         "nombre": "Carne en bistec",
-        "foto": "https://i.ytimg.com/vi/h5VVDwtpFX8/maxresdefault.jpg",
+        "foto": "https://www.mycolombianrecipes.com/wp-content/uploads/2010/02/Steak-a-la-Criolla-298x248.jpg",
         "porciones": 1,
         "ingredientes": {
             "Filete de carne": "4 filetes",
@@ -66,10 +66,10 @@
     },
     {
         "nombre": "Arepa boyacense",
-        "foto": "https://www.elespectador.com/resizer/UY6mrLnw_0WwZxLzi0Wc8KVT2bE=/525x350/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/MMSF4T4WD5HFLIZBHYYDXIBWZQ.jpg",
+        "foto": "https://www.chefandparty.com/wp-content/uploads/2020/06/Arepas-Boyacenses.jpeg",
         "porciones": 1,
         "ingredientes": {
-            "Harina de maiz amarillo": "1 taza",
+            "Harina de maiz": "1 taza",
             "Harina de trigo": "3 cucharadas",
             "Panela rallada": "2 1/2 cucharadas",
             "Sal": "1/4 cucharadita",
