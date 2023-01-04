@@ -1,6 +1,9 @@
 ![BrightCoders Logo](img/logo.png)
 
 # App recetario de cocina
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/30cbd0bdd66544ac9496e340c4517276)](https://app.codacy.com/gh/BrightCoders-Institute/BCDIC22-RN-recetario-cocina-team2?utm_source=github.com&utm_medium=referral&utm_content=BrightCoders-Institute/BCDIC22-RN-recetario-cocina-team2&utm_campaign=Badge_Grade_Settings)
+
 - [Ver instrucciones](./instructions.md)
 
 ## Tabla de contenidos
