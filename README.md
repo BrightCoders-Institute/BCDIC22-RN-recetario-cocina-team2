@@ -42,4 +42,4 @@ npm test
 - [@GaddPat0609](https://github.com/GaddPat0609)
 
 ## Insignias
-  
+ [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bea0bdd04acf4980bb432191c3ab8f60)](https://www.codacy.com/gh/BrightCoders-Institute/BCDIC22-RN-recetario-cocina-team2/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BrightCoders-Institute/BCDIC22-RN-recetario-cocina-team2&amp;utm_campaign=Badge_Grade)
