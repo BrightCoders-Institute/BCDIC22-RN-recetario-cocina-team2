@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {
   View,
   Text,
@@ -15,15 +17,31 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import EvilIcons from '@expo/vector-icons/EvilIcons'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
-import { event } from "../Event/index";
+import { event } from '../Event/index'
+import { likeReducer } from '../redux/reducer'
+import { createStore } from 'redux'
+import { Provider, useDispatch } from 'react-redux'
+import store from '../redux/store.js'
+import { actionAddLike } from '../redux/reducer'
+import { useSelector } from 'react-redux'
 
-export default function Details ({ route }) {
-  const nombre=route.params.nombre
-  const eventName=route.params.eventName
-  console.log("EVENTNMAME",typeof eventName)
+export default function Details({ route }) {
+  const dispatch = useDispatch()
+  const recetasLiked = useSelector(state => state)
+  //console.log("TIPOS",typeof recetasLiked)
+  // recetasLiked.map(r => console.log('RRRR', r.liked))
+  //console.log('recetasliekd]', recetasLiked)
+  const values=Object.values(recetasLiked)
+ // console.log("values",values)
+  // const isLiked = useSelector(state => state.liked)
+  // console.log("LIKED",isLiked)
+  //isLiked.map(r=>console.log("DDDDD",r))
+  const nombre = route.params.nombre
+  const eventName = route.params.eventName
+
   const navigation = useNavigation()
-  let isLiked = route.params.isLiked
-  console.log('isliked', isLiked)
+  // let isLiked = route.params.isLiked
+  //console.log('isliked', isLiked)
   const ingredientesInfo = route.params.ingredientes
   //console.log('routeparams', route.params)
   const nombreIngrediente = Object.keys(ingredientesInfo)
@@ -31,87 +49,109 @@ export default function Details ({ route }) {
   //console.log('nomnre Ingredientes:', nombreIngrediente)
   //console.log('nomnre cantidades:', cantidades)
   //console.log('nomnre :', route.params.nombre)
+  //const store = createStore(likeReducer)
+
+  //Funcin para acceder al nombre y liked:
+//const liked=true
+  // const liked = recetasLiked.find(receta => nombre === receta.nombre)
+  // console.log('LIKED', liked.liked)
+
+ const  liked=values.find(value=>value.nombre===nombre)
+console.log("LIKED____",liked)
 
   return (
-    <SafeAreaView style={styles.background}>
-      <ImageBackground
-        source={{
-          uri: route.params.foto
-        }}
-        style={styles.image}
-      >
-        <View style={styles.imageContainer}>
-          <TouchableOpacity>
-            <Ionicons
-              style={styles.iconCerrar}
-              name='close-outline' //Nombre que sale en la pagina
-              size={35}
-              color='white'
-              onPress={() => navigation.navigate('Home')}
-            />
-          </TouchableOpacity>
-
-          <Ionicons
-            style={styles.iconCompartir}
-            name='share-outline' //Nombre que sale en la pagina
-            size={25}
-            color='white'
-          />
-
-          <TouchableOpacity
-            onPress={() =>event.emit(eventName,nombre)}
-          >
-            {isLiked ? (
+    <Provider store={store}>
+      <SafeAreaView style={styles.background}>
+        <ImageBackground
+          source={{
+            uri: route.params.foto
+          }}
+          style={styles.image}
+        >
+          <View style={styles.imageContainer}>
+            <TouchableOpacity>
               <Ionicons
-                style={styles.iconCorazon}
-                name='heart' //Nombre que sale en la pagina
-                size={25}
-                color='red'
+                style={styles.iconCerrar}
+                name='close-outline' //Nombre que sale en la pagina
+                size={35}
+                color='white'
+                onPress={() => navigation.navigate('Home')}
               />
-            ) : (
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => dispatch(actionAddLike())}>
               <Ionicons
-                style={styles.iconCorazon}
-                name='heart-outline' //Nombre que sale en la pagina
+                style={styles.iconCompartir}
+                name='share-outline' //Nombre que sale en la pagina
                 size={25}
                 color='white'
               />
-            )}
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.contenedorTexto}>
-          <Text style={styles.textCategory}>TRENDING</Text>
-          <Text style={styles.text}>{route.params.nombre}</Text>
-        </View>
-      </ImageBackground>
-      <View style={styles.cantidad}>
-        <Text style={styles.smallText1}>Ingredients</Text>
-        <Text style={styles.smallText2}>for 3 servings</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.contenedor}>
-          <View style={styles.itemImgrediente}>
-            {nombreIngrediente.map(ingrediente => {
-              return (
-                <View style={styles.border}>
-                  <Text style={styles.textCantidades}>{ingrediente}</Text>
-                </View>
-              )
-            })}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={
+                liked.liked
+                  ? () =>
+                      store.dispatch({
+                        type: '@liked/quit',
+                        payload: { nombre: nombre }
+                      })
+                  : () =>
+                      store.dispatch({
+                        type: '@liked/added',
+                        payload: { nombre: nombre }
+                      })
+              }
+            >
+              {liked.liked ? (
+                <Ionicons
+                  style={styles.iconCorazon}
+                  name='heart' //Nombre que sale en la pagina
+                  size={25}
+                  color='red'
+                />
+              ) : (
+                <Ionicons
+                  style={styles.iconCorazon}
+                  name='heart' //Nombre que sale en la pagina
+                  size={25}
+                  color='white'
+                />
+              )}
+            </TouchableOpacity>
           </View>
-          <View style={styles.itemImgrediente}>
-            {cantidades.map(cantidad => {
-              return (
-                <View style={styles.border}>
-                  <Text style={styles.textCantidadesDerecha}>{cantidad}</Text>
-                </View>
-              )
-            })}
-          </View>
-        </View>
-      </ScrollView>
 
-      {/* <FlatList
+          <View style={styles.contenedorTexto}>
+            <Text style={styles.textCategory}>TRENDING</Text>
+            <Text style={styles.text}>{route.params.nombre}</Text>
+          </View>
+        </ImageBackground>
+        <View style={styles.cantidad}>
+          <Text style={styles.smallText1}>Ingredients</Text>
+          <Text style={styles.smallText2}>for 3 servings</Text>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.contenedor}>
+            <View style={styles.itemImgrediente}>
+              {nombreIngrediente.map(ingrediente => {
+                return (
+                  <View style={styles.border}>
+                    <Text style={styles.textCantidades}>{ingrediente}</Text>
+                  </View>
+                )
+              })}
+            </View>
+            <View style={styles.itemImgrediente}>
+              {cantidades.map(cantidad => {
+                return (
+                  <View style={styles.border}>
+                    <Text style={styles.textCantidadesDerecha}>{cantidad}</Text>
+                  </View>
+                )
+              })}
+            </View>
+          </View>
+        </ScrollView>
+
+        {/* <FlatList
         data={ingredientesInfo}
         keyExtractor={(item, index) => index.toString()}
         
@@ -123,7 +163,8 @@ export default function Details ({ route }) {
       >
        
       </FlatList> */}
-    </SafeAreaView>
+      </SafeAreaView>
+    </Provider>
   )
 }
 

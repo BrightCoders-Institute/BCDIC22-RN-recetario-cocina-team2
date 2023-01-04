@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   Button,
   View,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native'
+import { useSelector } from 'react-redux'
 
 const Item = ({
   navigation,
@@ -17,7 +19,8 @@ const Item = ({
   recetaObject
 }) => {
   const isLiked = recetaObject
-  console.log('islided', recetaObject)
+  
+  //console.log('islided', recetaObject)
   return (
     <View style={styles.item}>
       <TouchableOpacity

@@ -1,37 +1,64 @@
+/* eslint-disable */
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Button,
   View
 } from 'react-native'
 import Item from '../Item/Item'
+import { useSelector } from 'react-redux'
 const recetas = require('../../recetas.json')
 
 const ListaHorizontal = ({
   navigation,
-  data,
-  liked,
+
   setLikedReceta,
-  recetasData
+  render
 }) => {
+  const recetasLiked = useSelector(state => state)
+  //console.log('recetasliekdHOME]', recetasLiked)
+  const values = Object.values(recetasLiked)
+  //console.log('valuesHOME', values)
+  let recetaRender = []
+
+  values.map(value =>
+    value.liked
+      ? recetaRender.push(
+          recetas.find(receta => receta.nombre === value.nombre)
+        )
+      : console.log('NOOO')
+  )
+
+  //console.log("RECETAs",recetasData)
+
+  console.log('RECETARENER', recetaRender)
+
   return (
     <View style={styles.contenedor}>
       <ScrollView horizontal={true} style={styles.scroll}>
-        {recetas.map(receta => {
-          return (
-            <Item
-              navigation={navigation}
-              key={receta.nombre}
-              nombre={receta.nombre}
-              foto={receta.foto}
-              ingredientes={receta.ingredientes}
-              recetaObject={liked(receta.nombre)}
-              recetasData={recetasData}
-              setLikedReceta={setLikedReceta}
-            />
-          )
-        })}
+        {render === 'all'
+          ? recetas.map(receta => {
+              return (
+                <Item
+                  navigation={navigation}
+                  key={receta.nombre}
+                  nombre={receta.nombre}
+                  foto={receta.foto}
+                  ingredientes={receta.ingredientes}
+                />
+              )
+            })
+          : recetaRender.map(receta => {
+              return (
+                <Item
+                  navigation={navigation}
+                  key={receta.nombre}
+                  nombre={receta.nombre}
+                  foto={receta.foto}
+                  ingredientes={receta.ingredientes}
+                />
+              )
+            })}
       </ScrollView>
     </View>
   )

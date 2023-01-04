@@ -1,21 +1,19 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Image
-} from 'react-native'
+/* eslint-disable */
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import BarraBusqueda from '../Componentes/BarraBusqueda/BarraBusqueda'
 import ListaHorizontal from '../Componentes/ListaHorizontal/ListaHorizontal'
 import { useState, useEffect } from 'react'
-import {event} from '../Event/index'
-//import image from './assets/favicon.png'
+import { event } from '../Event/index'
+import { useSelector } from 'react-redux'
+
+// import image from './assets/favicon.png'
 const data = require('../recetas.json')
 
 export default function Home ({ nav }) {
+  // const recetasLiked = useSelector(state => state)
+  // recetasLiked.map(r => console.log('RRRR', r.liked))
+  // console.log('recetasliekd]', recetasLiked)
   const [recetas, setRecetas] = useState([])
 
   useEffect(() => {
@@ -28,43 +26,40 @@ export default function Home ({ nav }) {
     )
   }, [])
 
-  useEffect(()=>{
-    event.on("setLikedReceta",setLikedReceta)
-    return ()=>{
-      event.off("setLikedReceta",setLikedReceta)
+  useEffect(() => {
+    event.on('setLikedReceta', setLikedReceta)
+    return () => {
+      event.off('setLikedReceta', setLikedReceta)
     }
-  },[setLikedReceta])
+  }, [setLikedReceta])
 
-  //recetas.map(receta=>console.log("house",receta))
+  // recetas.map(receta=>console.log("house",receta))
 
   const liked = nombre => {
-    
-    recetas.map(r => console.log('XXXX', recetas.length))
     const recetaObject = recetas.find(receta => receta.nombre === nombre)
 
-   // console.log("LIKED",nombre)
+    // console.log("LIKED",nombre)
     const recetaLiked = recetaObject?.liked
-    //console.log('houseobjects', houseObject?.liked)
-    //console.log("XXX",houseObject.liked)
-    console.log("LIKED",recetaLiked)
+    // console.log('houseobjects', houseObject?.liked)
+    // console.log("XXX",houseObject.liked)
+    //console.log('LIKED', recetaLiked)
     return recetaLiked
   }
 
-  const setLikedReceta = (nombre) => {
+  const setLikedReceta = nombre => {
     console.log(typeof nombre)
-    console.log('nombreCLICEKADO:____-',nombre)
-    let equalReceta = recetas.find(receta =>
-      receta.nombre === nombre 
-    )
+    console.log('nombreCLICEKADO:____-', nombre)
+    const equalReceta = recetas.find(receta => receta.nombre === nombre)
+
     console.log('equalReceta:____-', equalReceta)
 
-    let nuevaRecetaLiked = {
+    const nuevaRecetaLiked = {
       nombre: equalReceta.nombre,
       liked: true
     }
-   console.log('nuevaRecetaLiked:____-', nuevaRecetaLiked)
+    console.log('nuevaRecetaLiked:____-', nuevaRecetaLiked)
 
-    let nuevaRecetaUnliked = {
+    const nuevaRecetaUnliked = {
       nombre: equalReceta.nombre,
       liked: false
     }
@@ -83,7 +78,8 @@ export default function Home ({ nav }) {
 
     console.log('newRecetas:____-', newRecetas)
     recetas.map(r => console.log('RRRR', r))
-    //console.log("recetas:____-",recetas)
+    setRecetas(newRecetas)
+    // console.log("recetas:____-",recetas)
   }
 
   const navigation = useNavigation()
@@ -92,7 +88,14 @@ export default function Home ({ nav }) {
       <View>
         <BarraBusqueda />
         <Text style={styles.text}>TRENDING</Text>
-        {/* <ListaHorizontal navigation={navigation}/>  */}
+        <ListaHorizontal 
+        navigation={navigation}
+          data={data}
+          liked={liked}
+          recetasData={recetas}
+          setLikedReceta={setLikedReceta}
+          render='liked'
+        />  
         <Text style={styles.text}>RECENT</Text>
         <ListaHorizontal
           navigation={navigation}
@@ -100,6 +103,7 @@ export default function Home ({ nav }) {
           liked={liked}
           recetasData={recetas}
           setLikedReceta={setLikedReceta}
+          render='all'
         />
       </View>
     </SafeAreaView>
