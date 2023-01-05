@@ -1,63 +1,34 @@
-/* eslint-disable */
-
+/* eslint-disable react/jsx-key */
+/* eslint-disable multiline-ternary */
+/* eslint-disable react/prop-types */
 import {
   View,
   Text,
   StyleSheet,
-  Image,
-  Dimensions,
   ImageBackground,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
-  FlatList
+  TouchableOpacity
 } from 'react-native'
 import React from 'react'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
-import EvilIcons from '@expo/vector-icons/EvilIcons'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
-import { event } from '../Event/index'
-import { likeReducer } from '../redux/reducer'
-import { createStore } from 'redux'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import store from '../redux/store.js'
 import { actionAddLike } from '../redux/reducer'
-import { useSelector } from 'react-redux'
 
-export default function Details({ route }) {
+export default function Details ({ route }) {
   const dispatch = useDispatch()
   const recetasLiked = useSelector(state => state)
-  //console.log("TIPOS",typeof recetasLiked)
-  // recetasLiked.map(r => console.log('RRRR', r.liked))
-  //console.log('recetasliekd]', recetasLiked)
-  const values=Object.values(recetasLiked)
- // console.log("values",values)
-  // const isLiked = useSelector(state => state.liked)
-  // console.log("LIKED",isLiked)
-  //isLiked.map(r=>console.log("DDDDD",r))
+  const values = Object.values(recetasLiked)
   const nombre = route.params.nombre
-  const eventName = route.params.eventName
-
   const navigation = useNavigation()
-  // let isLiked = route.params.isLiked
-  //console.log('isliked', isLiked)
   const ingredientesInfo = route.params.ingredientes
-  //console.log('routeparams', route.params)
   const nombreIngrediente = Object.keys(ingredientesInfo)
   const cantidades = Object.values(ingredientesInfo)
-  //console.log('nomnre Ingredientes:', nombreIngrediente)
-  //console.log('nomnre cantidades:', cantidades)
-  //console.log('nomnre :', route.params.nombre)
-  //const store = createStore(likeReducer)
 
-  //Funcin para acceder al nombre y liked:
-//const liked=true
-  // const liked = recetasLiked.find(receta => nombre === receta.nombre)
-  // console.log('LIKED', liked.liked)
-
- const  liked=values.find(value=>value.nombre===nombre)
-console.log("LIKED____",liked)
+  const liked = values.find(value => value.nombre === nombre)
+  console.log('LIKED____', liked)
 
   return (
     <Provider store={store}>
@@ -72,7 +43,7 @@ console.log("LIKED____",liked)
             <TouchableOpacity>
               <Ionicons
                 style={styles.iconCerrar}
-                name='close-outline' //Nombre que sale en la pagina
+                name='close-outline' // Nombre que sale en la pagina
                 size={35}
                 color='white'
                 onPress={() => navigation.navigate('Home')}
@@ -81,7 +52,7 @@ console.log("LIKED____",liked)
             <TouchableOpacity onPress={() => dispatch(actionAddLike())}>
               <Ionicons
                 style={styles.iconCompartir}
-                name='share-outline' //Nombre que sale en la pagina
+                name='share-outline' // Nombre que sale en la pagina
                 size={25}
                 color='white'
               />
@@ -92,26 +63,26 @@ console.log("LIKED____",liked)
                   ? () =>
                       store.dispatch({
                         type: '@liked/quit',
-                        payload: { nombre: nombre }
+                        payload: { nombre }
                       })
                   : () =>
                       store.dispatch({
                         type: '@liked/added',
-                        payload: { nombre: nombre }
+                        payload: { nombre }
                       })
               }
             >
               {liked.liked ? (
                 <Ionicons
                   style={styles.iconCorazon}
-                  name='heart' //Nombre que sale en la pagina
+                  name='heart' // Nombre que sale en la pagina
                   size={25}
                   color='red'
                 />
               ) : (
                 <Ionicons
                   style={styles.iconCorazon}
-                  name='heart' //Nombre que sale en la pagina
+                  name='heart' // Nombre que sale en la pagina
                   size={25}
                   color='white'
                 />
@@ -150,19 +121,6 @@ console.log("LIKED____",liked)
             </View>
           </View>
         </ScrollView>
-
-        {/* <FlatList
-        data={ingredientesInfo}
-        keyExtractor={(item, index) => index.toString()}
-        
-        renderItem={({ item }) => (
-          <View>
-            <Text style={styles.itemImgrediente}></Text>
-          </View>
-        )}
-      >
-       
-      </FlatList> */}
       </SafeAreaView>
     </Provider>
   )
@@ -170,19 +128,19 @@ console.log("LIKED____",liked)
 
 const styles = StyleSheet.create({
   contenedorTexto: {
-    //backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   linea: {
     backgroundColor: 'red'
   },
   cantidad: {
-    //backgroundColor: 'red',
+    // backgroundColor: 'red',
     alignSelf: 'flex-start',
     marginLeft: 15,
     marginTop: 10
   },
   smallTextCantidad: {
-    //backgroundColor:"red",
+    // backgroundColor:"red",
     color: 'white',
     margin: 3,
     marginLeft: 80,
@@ -222,19 +180,19 @@ const styles = StyleSheet.create({
   imageContainer: {
     display: 'flex',
     flexDirection: 'row',
-    //backgroundColor: 'rgba(40,40,40,0.7)',
+    // backgroundColor: 'rgba(40,40,40,0.7)',
     width: 400,
     height: 220
   },
   iconCorazon: {
     marginTop: 40,
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     display: 'flex',
     flexDirection: 'row',
 
     height: 30
-    //marginLeft: 180
-    //justifyContent: 'flex-end'
+    // marginLeft: 180
+    // justifyContent: 'flex-end'
   },
   iconCerrar: {
     marginTop: 40,
@@ -243,7 +201,7 @@ const styles = StyleSheet.create({
 
     marginLeft: 25,
     height: 30
-    //backgroundColor: 'red'
+    // backgroundColor: 'red'
   },
   iconCompartir: {
     marginTop: 40,
@@ -251,8 +209,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     height: 30
-    //marginLeft: 30,
-    //backgroundColor: 'green'
+    // marginLeft: 30,
+    // backgroundColor: 'green'
   },
   ingredientes: {
     // backgroundColor: 'green',
@@ -266,7 +224,7 @@ const styles = StyleSheet.create({
     // height: 200
   },
   contenedor: {
-    //backgroundColor: 'green',
+    // backgroundColor: 'green',
     display: 'flex',
     flexDirection: 'row',
     marginTop: 20
@@ -276,14 +234,14 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   itemImgrediente: {
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     margin: 0,
     display: 'flex',
     flexDirection: 'column',
     width: 150
-    //justifyContent:"flex-start",
-    //alignContent:"flex-start"
-    //alignItems:"flex-start"
+    // justifyContent:"flex-start",
+    // alignContent:"flex-start"
+    // alignItems:"flex-start"
   },
   textCantidades: {
     color: 'white',
@@ -300,6 +258,6 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(255,255,255,0.1)',
     borderBottomWidth: 1
 
-    //backgroundColor: 'blue',
+    // backgroundColor: 'blue',
   }
 })

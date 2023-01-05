@@ -9,18 +9,7 @@ import {
 } from 'react-native'
 import { useSelector } from 'react-redux'
 
-const Item = ({
-  navigation,
-  nombre,
-  foto,
-  ingredientes,
-  setLikedReceta,
-  recetasData,
-  recetaObject
-}) => {
-  const isLiked = recetaObject
-  
-  //console.log('islided', recetaObject)
+const Item = ({ navigation, nombre, foto, ingredientes }) => {
   return (
     <View style={styles.item}>
       <TouchableOpacity
@@ -29,7 +18,7 @@ const Item = ({
             ingredientes: ingredientes,
             foto,
             nombre: nombre,
-            isLiked: isLiked,
+
             eventName: 'setLikedReceta'
           })
         }

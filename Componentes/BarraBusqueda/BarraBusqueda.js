@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, TextInput, StyleSheet, Image } from 'react-native'
+import { View, TextInput, StyleSheet } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 const BarraBusqueda = () => {
@@ -8,7 +8,7 @@ const BarraBusqueda = () => {
       <View style={styles.iconSearchContainer}>
         <FontAwesome
           style={styles.icon}
-          name='search' //Nombre que sale en la pagina
+          name='search' // Nombre que sale en la pagina
           size={13}
           color='white'
         />
@@ -35,12 +35,11 @@ const BarraBusqueda = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width:300,
+    width: 300,
     flexDirection: 'row',
     margin: 20,
     marginTop: 50,
     alignItems: 'center',
-    backgroundColor: 'red',
     backgroundColor: '#474747',
     padding: 2,
     borderRadius: 15
@@ -61,8 +60,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     color: 'white'
   },
-  textInput:{
-    color:'white'
+  textInput: {
+    color: 'white'
   },
   iconMicContainer: {},
   text: {

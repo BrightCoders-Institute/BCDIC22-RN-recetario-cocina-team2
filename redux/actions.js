@@ -1,1 +1,0 @@
-export const SET_LIKED_RECETA = 'SET_LIKED_RECETA'
