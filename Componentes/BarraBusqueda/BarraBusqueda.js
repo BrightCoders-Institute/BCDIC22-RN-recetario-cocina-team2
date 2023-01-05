@@ -18,6 +18,7 @@ const BarraBusqueda = () => {
         <TextInput
           style={styles.textInput}
           placeholder='What do you want to eat?'
+          placeholderTextColor='white'
           maxLenght={20}
         />
       </View>

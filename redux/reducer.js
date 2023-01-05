@@ -14,7 +14,7 @@ export const actionQuitLike = {
 export const actionViewState = {
   type: '@liked/viewState'
 }
-const initialState = []
+export const initialState = []
 
 console.log('primerinitialState', initialState.length)
 if (initialState.length === 0) {
@@ -29,9 +29,9 @@ let modState = [...initialState]
 export const likeReducer = (state = modState, action) => {
   switch (action.type) {
     case '@liked/added':
-      modState = initialState.map(receta => {
+      modState = modState.map(receta => {
         if (receta.nombre === action.payload.nombre) {
-          console.log('ESTOY EN IF RETRUN__', action.payload.nombre)
+          //console.log('ESTOY EN IF RETRUN__', action.payload.nombre)
           return {
             ...receta,
             liked: true
@@ -45,15 +45,16 @@ export const likeReducer = (state = modState, action) => {
       return modState
 
     case '@liked/quit':
-      modState = initialState.map(receta => {
+      modState = modState.map(receta => {
         if (receta.nombre === action.payload.nombre) {
           //console.log('ESTOY EN IF RETRUN__', action.payload.nombre)
           return {
             ...receta,
             liked: false
           }
+        } else {
+          return receta
         }
-        return receta
       })
       console.log('modState', modState)
 
